@@ -8,6 +8,7 @@ COPY . /backend
 ENV PYTHONPATH=/backend
 
 RUN pip install poetry #--no-cache-dir
+
 COPY pyproject.toml poetry.lock* /backend/
 
 RUN poetry install # --no-root --no-dev

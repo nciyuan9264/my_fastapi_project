@@ -26,7 +26,7 @@ class UserInDBBase(UserBase):
     id: Optional[int] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class Item(BaseModel):
     id: int
@@ -34,14 +34,14 @@ class Item(BaseModel):
     description: str
 
     class Config:
-        orm_mode = True  # 确保 Pydantic 可以接受 ORM 对象
+        from_attributes = True  # 确保 Pydantic 可以接受 ORM 对象
 
 # 更新 User schema，添加 items 字段
 class User(UserInDBBase):
     items: List[Item] = []  # 添加 items 字段
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Additional properties stored in DB
 class UserInDB(UserInDBBase):

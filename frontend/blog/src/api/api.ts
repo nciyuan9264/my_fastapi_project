@@ -1,6 +1,6 @@
 export const api = {
   async getMe() {
-    return fetch('http://localhost:8000/users/')
+    return fetch('http://localhost/users/')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

@@ -16,18 +16,20 @@ services:
       context: ./backend
       dockerfile: backend.dockerfile
     env_file: .env
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     depends_on:
       - blog_database
 
-  blog_frontend:
-    build:
-      context: ./frontend
-      dockerfile: frontend.dockerfile
+  blog_nginx:
+    image: nginx:alpine
     volumes:
-      - ./frontend/blog/dist:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf        # 自定义 Nginx 配置文件
+      - ./frontend/blog/dist:/usr/share/nginx/html # 挂载前端静态文件
     ports:
-      - "8080:8080"
+      - "80:80"
+    depends_on:
+      - blog_backend
+
 volumes:
   blog_database_data:
