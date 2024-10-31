@@ -10,6 +10,11 @@ services:
       - "3306:3306"
     volumes:
       - blog_database_data:/var/lib/mysql
+    
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
 
   blog_backend:
     build:
@@ -20,6 +25,7 @@ services:
       - "8000"
     depends_on:
       - blog_database
+      - redis
 
   blog_nginx:
     image: nginx:alpine
