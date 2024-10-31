@@ -16,6 +16,16 @@ services:
     ports:
       - "6379:6379"
 
+  flower:
+    image: mher/flower
+    ports:
+      - "5555:5555"  # Flower 默认在 5555 端口运行
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/1
+    depends_on:
+      - redis
+
   blog_backend:
     build:
       context: ./backend

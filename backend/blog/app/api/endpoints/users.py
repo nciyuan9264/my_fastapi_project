@@ -14,7 +14,7 @@ def read_users(
         limit: int = 100,
 ):
     # 异步触发任务
-    res = add.delay(1, 2)
+    res = add.delay(10000)
     return {"task_id": res.id, "status": res.status}
 
 # 查询任务状态
